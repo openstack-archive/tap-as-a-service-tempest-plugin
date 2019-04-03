@@ -24,12 +24,10 @@ class NeutronTaaSPlugin(plugins.TempestPlugin):
 
     def load_tests(self):
         this_dir = os.path.dirname(os.path.abspath(__file__))
-        # top_level_dir = $(this_dir)/../../..
-        d = os.path.split(this_dir)[0]
-        d = os.path.split(d)[0]
-        top_level_dir = os.path.split(d)[0]
+        # top_level_dir = $(this_dir)/..
+        top_level_dir = os.path.split(this_dir)[0]
         test_dir = os.path.join(top_level_dir,
-                                'neutron_taas/tests/tempest_plugin/tests')
+                                'neutron_taas_tempest_plugin/tests')
         return (test_dir, top_level_dir)
 
     def register_opts(self, conf):
