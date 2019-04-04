@@ -2,3 +2,7 @@
     templates:
       - check-requirements
       - tempest-plugin-jobs
+    check:
+      jobs:
+        - tap-as-a-service-tempest-dsvm
+          voting: false
