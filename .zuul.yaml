@@ -2,3 +2,38 @@
     templates:
       - check-requirements
       - tempest-plugin-jobs
+    check:
+      jobs:
+        - tap-as-a-service-tempest-dsvm-master
+        - tap-as-a-service-tempest-dsvm-rocky
+        - tap-as-a-service-tempest-dsvm-queens
+        - tap-as-a-service-tempest-dsvm-pike
+        - tap-as-a-service-tempest-dsvm-ocata
+
+- job:
+    name: tap-as-a-service-tempest-dsvm-master
+    parent: tap-as-a-service-tempest-dsvm
+
+- job:
+    name: tap-as-a-service-tempest-dsvm-rocky
+    parent: tap-as-a-service-tempest-dsvm
+	branches: stable/rocky
+	nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-dsvm-queens
+    parent: tap-as-a-service-tempest-dsvm
+	branches: stable/queens
+	nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-dsvm-pike
+    parent: tap-as-a-service-tempest-dsvm
+	branches: stable/pike
+	nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-dsvm-ocata
+    parent: tap-as-a-service-tempest-dsvm
+	branches: stable/ocata
+	nodeset: openstack-single-node-xenial
