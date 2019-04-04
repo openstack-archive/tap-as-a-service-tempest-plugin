@@ -128,7 +128,6 @@
       - ^(test-|)requirements.txt$
       - ^releasenotes/.*$
       - ^doc/.*$
-      - ^setup.cfg$
       - ^.*\.rst$
       - ^tools/.*$
       - ^tox.ini$
