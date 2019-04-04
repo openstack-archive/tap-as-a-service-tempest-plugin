@@ -2,3 +2,161 @@
     templates:
       - check-requirements
       - tempest-plugin-jobs
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin:
+            voting: false
+        - tap-as-a-service-tempest-plugin-rocky:
+            voting: false
+        - tap-as-a-service-tempest-plugin-queens:
+            voting: false
+        - tap-as-a-service-tempest-plugin-pike:
+            voting: false
+        - tap-as-a-service-tempest-plugin-ocata:
+            voting: false
+
+- job:
+    name: tap-as-a-service-tempest-plugin
+    parent: devstack-tempest
+    description: |
+      Perform setup common to all tap-as-a-service tempest tests
+    roles:
+      - zuul: openstack-dev/devstack
+    required-projects:
+      - openstack-infra/devstack-gate
+      - openstack/neutron
+      - openstack/neutron-tempest-plugin
+      - openstack/tap-as-a-service
+      - openstack/tap-as-a-service-tempest-plugin
+      - openstack/tempest
+    vars:
+      tempest_concurrency: 4
+      tox_envlist: all
+      network_api_extensions_common:
+        - agent
+        - allowed-address-pairs
+        - auto-allocated-topology
+        - availability_zone
+        - binding
+        - default-subnetpools
+        - dhcp_agent_scheduler
+        - dns-domain-ports
+        - dns-integration
+        - empty-string-filtering
+        - ext-gw-mode
+        - external-net
+        - extra_dhcp_opt
+        - extraroute
+        - filter-validation
+        - fip-port-details
+        - flavors
+        - floatingip-pools
+        - ip-substring-filtering
+        - l3-flavors
+        - l3-ha
+        - l3_agent_scheduler
+        - logging
+        - metering
+        - multi-provider
+        - net-mtu
+        - net-mtu-writable
+        - network-ip-availability
+        - network_availability_zone
+        - pagination
+        - port-resource-request
+        - port-mac-address-regenerate
+        - port-security
+        - port-security-groups-filtering
+        - project-id
+        - provider
+        - qos
+        - qos-bw-minimum-ingress
+        - qos-fip
+        - quotas
+        - quota_details
+        - rbac-policies
+        - router
+        - router_availability_zone
+        - security-group
+        - segment
+        - service-type
+        - sorting
+        - standard-attr-description
+        - standard-attr-revisions
+        - standard-attr-segment
+        - standard-attr-tag
+        - standard-attr-timestamp
+        - subnet_allocation
+        - trunk
+        - trunk-details
+        - uplink-status-propagation
+      network_api_extensions_tempest:
+        - taas
+      devstack_localrc:
+        USE_PYTHON3: true
+        TEMPEST_PLUGINS: "'/opt/stack/neutron-tempest-plugin /opt/stack/tap-as-a-service-tempest-plugin'"
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_tempest) | join(',') }}"
+      devstack_plugins:
+        neutron: git://git.openstack.org/openstack/neutron.git
+        tap-as-a-service: git://git.openstack.org/openstack/tap-as-a-service.git
+      devstack_services:
+        base: false
+        key: true
+        mysql: true
+        rabbit: true
+        g-api: true
+        g-reg: true
+        n-api: true
+        n-cond: true
+        n-cpu: true
+        n-crt: true
+        n-sch: true
+        placement-api: true
+        n-api-meta: true
+        q-agt: true
+        q-dhcp: true
+        q-l3: true
+        q-meta: true
+        q-metering: true
+        q-svc: true
+        quantum: true
+        taas: true
+        taas_openvswitch_agent: true
+        tempest: true
+        dstat: true
+    irrelevant-files: &tempest-irrelevant-files
+      - ^(test-|)requirements.txt$
+      - ^releasenotes/.*$
+      - ^doc/.*$
+      - ^setup.cfg$
+      - ^.*\.rst$
+      - ^tools/.*$
+      - ^tox.ini$
+
+- job:
+    name: tap-as-a-service-tempest-plugin-base
+    parent: tap-as-a-service-tempest-plugin
+
+- job:
+    name: tap-as-a-service-tempest-plugin-rocky
+    parent: tap-as-a-service-tempest-plugin
+    override-checkout: stable/rocky
+    nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-plugin-queens
+    parent: tap-as-a-service-tempest-plugin
+    override-checkout: stable/queens
+    nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-plugin-pike
+    parent: tap-as-a-service-tempest-plugin
+    override-checkout: stable/pike
+    nodeset: openstack-single-node-xenial
+
+- job:
+    name: tap-as-a-service-tempest-plugin-ocata
+    parent: tap-as-a-service-tempest-plugin
+    override-checkout: stable/ocata
+    nodeset: openstack-single-node-xenial
