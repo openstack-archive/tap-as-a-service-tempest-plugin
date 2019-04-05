@@ -169,3 +169,39 @@
         (?x)    # Ignore comments and whitespaces
         # bug 1814937
         neutron_taas_tempest_plugin\.tests\.api\.test_taas\.TaaSExtensionTestJSON\.test_delete_tap_resources_after_ts_port_delete
+
+- project-template:
+    name: tap-as-a-service-tempest-plugin-jobs
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin
+
+- project-template:
+    name: tap-as-a-service-tempest-plugin-jobs-rocky
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-rocky
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-rocky
+
+- project-template:
+    name: tap-as-a-service-tempest-plugin-jobs-queens
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-queens
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-queens
+
+- project-template:
+    name: tap-as-a-service-tempest-plugin-jobs-pike
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-pike
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-pike
