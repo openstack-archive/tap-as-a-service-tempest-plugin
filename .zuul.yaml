@@ -154,3 +154,39 @@
     parent: tap-as-a-service-tempest-plugin
     override-checkout: stable/pike
     nodeset: openstack-single-node-xenial
+
+- project-template:
+    name: neutron-tempest-plugin-jobs
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-rocky
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-rocky
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-rocky
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-queens
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-queens
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-queens
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-pike
+    check:
+      jobs:
+        - tap-as-a-service-tempest-plugin-pike
+    gate:
+      jobs:
+        - tap-as-a-service-tempest-plugin-pike
