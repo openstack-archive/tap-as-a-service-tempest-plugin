@@ -14,6 +14,12 @@
             voting: false
         # NOTE(yamamoto): devstack doesn't have job definition in ocata
 
+        # Non-voting jobs from other projects using this tempest plugin
+        # NOTE(yamamoto): Explicitly marked non-voting here to avoid being
+        # affected by their job definition.
+        - networking-midonet-tempest-aio-ml2-full-centos-7
+            voting: false
+
 - job:
     name: tap-as-a-service-tempest-plugin
     parent: devstack-tempest
