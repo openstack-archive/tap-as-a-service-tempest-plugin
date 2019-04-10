@@ -274,4 +274,4 @@ class TestTaaS(base.TaaSScenarioTest):
                                         source_port=source_port['id'],
                                         vlan_filter=vlan_filter)
 
-        self.assertEqual(tap_flow['tap_flow']['vlan_filter'], vlan_filter)
+        self.assertEqual(tap_flow['vlan_filter'], vlan_filter)

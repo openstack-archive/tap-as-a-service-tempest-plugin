@@ -61,8 +61,7 @@ class TaaSExtensionTestJSON(base.BaseTaaSTest):
                                         direction='BOTH',
                                         source_port=self.tf_port['id'],
                                         vlan_filter='189,279,999-1008')
-        self.assertEqual(tap_flow['tap_flow']['vlan_filter'],
-                         '189,279,999-1008')
+        self.assertEqual(tap_flow['vlan_filter'], '189,279,999-1008')
 
     @decorators.idempotent_id('d7a2115d-16b4-41cf-95a6-dcebc3682b24')
     def test_delete_tap_resources_after_ts_port_delete(self):
