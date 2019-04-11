@@ -97,6 +97,7 @@
         - uplink-status-propagation
       network_api_extensions_tempest:
         - taas
+        - taas-vlan-filter
       devstack_localrc:
         TEMPEST_PLUGINS: /opt/stack/tap-as-a-service-tempest-plugin
         USE_PYTHON3: false
@@ -149,6 +150,8 @@
     override-checkout: stable/rocky
     nodeset: openstack-single-node-xenial
     vars:
+      network_api_extensions_tempest:
+        - taas
       tempest_black_regex: |
         (?x)    # Ignore comments and whitespaces
         # bug 1814937
@@ -160,6 +163,8 @@
     override-checkout: stable/queens
     nodeset: openstack-single-node-xenial
     vars:
+      network_api_extensions_tempest:
+        - taas
       tempest_black_regex: |
         (?x)    # Ignore comments and whitespaces
         # bug 1814937
@@ -171,6 +176,8 @@
     override-checkout: stable/pike
     nodeset: openstack-single-node-xenial
     vars:
+      network_api_extensions_tempest:
+        - taas
       tempest_black_regex: |
         (?x)    # Ignore comments and whitespaces
         # bug 1814937
